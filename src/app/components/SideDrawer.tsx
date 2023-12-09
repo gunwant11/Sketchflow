@@ -4,46 +4,44 @@ import { fabric } from 'fabric'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import Layer from './Layer'
-import Konva from 'konva'
+import { createCanvas } from '../page'
+
 
 export interface ILayer {
-  object : Konva.Layer
+  object : fabric.Canvas
   name: string
   id: number
   visible: boolean
-  locked: boolean
-}
+  }
+
 
 interface SideDrawerProps {
- stage : Konva.Stage 
- activeLayer : Konva.Layer
- setActiveLayer: () => void
-
+ canvas: fabric.Canvas
+  layers: ILayer[]
+  setLayers: React.Dispatch<React.SetStateAction<ILayer[]>>
 }
 
-function SideDrawer({ stage, activeLayer, setActiveLayer }: SideDrawerProps) {
-const [layers, setLayers] = useState<ILayer[]>([])
+
+function SideDrawer({ canvas, layers, setLayers }: SideDrawerProps) {
   
 
   useEffect(() => {
-    if (!stage) return
+    if (!canvas) return
     addLayer()
-  }, [stage])
+  }, [canvas])
 
   const addLayer = () => {
-    const layer = new Konva.Layer()
-    const newLayer = {
-      object: layer,
+        const newLayer = {
+      object: createCanvas(layers.length + 1),
       name: `Layer ${layers.length + 1}`,
       id: layers.length + 1,
       visible: true,
-      locked: false,
-    };
+          };
+
+newLayer.object.renderAll()
 
   setLayers((prevLayers) => [...prevLayers, newLayer]);
-  setActiveLayer(layer)
-   stage.current.add(layer);
-  };
+    };
 
   const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
     setLayers((prevLayers: ILayer[]) =>
