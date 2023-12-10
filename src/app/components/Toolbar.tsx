@@ -1,12 +1,10 @@
 import { Circle, Eraser, ImagePlus, MousePointer2, PenTool, Square, Type } from 'lucide-react';
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/css";
-import { ILayer } from './SideDrawer';
-
+import { fabric } from 'fabric'
 interface Props {
   canvas: fabric.Canvas
-  activeLayer: ILayer
 }
 
 const ToolMap = {
@@ -20,7 +18,7 @@ const ToolMap = {
   color: 'Color',
 }
 
-function Toolbar({ canvas, activeLayer }: Props) {
+function Toolbar({ canvas }: Props) {
   const [color, setColor] = useColor("rgb(86 30 203)");
   const [showColorPicker, setShowColorPicker] = React.useState(false);
 
@@ -40,7 +38,7 @@ function Toolbar({ canvas, activeLayer }: Props) {
     }
   };
 
-  const addRect = (canvas: fabric.Canvas) => {
+  const addRect = () => {
     canvas.isDrawingMode = false;
     const rect = new fabric.Rect({
       height: 200,
@@ -52,7 +50,7 @@ function Toolbar({ canvas, activeLayer }: Props) {
     canvas?.requestRenderAll();
   };
 
-  const addCircle = (canvas: fabric.Canvas) => {
+  const addCircle = () => {
     canvas.isDrawingMode = false;
     const circle = new fabric.Circle({
       radius: 50,
@@ -63,7 +61,7 @@ function Toolbar({ canvas, activeLayer }: Props) {
     canvas?.requestRenderAll();
   }
 
-  const draw = (canvas: fabric.Canvas) => {
+  const draw = () => {
     const pen = new fabric.PencilBrush(canvas);
     canvas.freeDrawingBrush = pen
     canvas.freeDrawingBrush.width = 10
@@ -73,7 +71,7 @@ function Toolbar({ canvas, activeLayer }: Props) {
   }
 
 
-  const addText = (canvas: fabric.Canvas) => {
+  const addText = () => {
     canvas.isDrawingMode = false;
     const text = new fabric.Textbox('Text', {
       left: 50,
@@ -86,7 +84,7 @@ function Toolbar({ canvas, activeLayer }: Props) {
     canvas?.requestRenderAll();
   }
 
-  const eraseElents = (canvas: fabric.Canvas) => {
+  const eraseElents = () => {
 
     const erase = new fabric.EraserBrush(canvas);
     canvas.freeDrawingBrush = erase
@@ -96,17 +94,17 @@ function Toolbar({ canvas, activeLayer }: Props) {
     canvas?.requestRenderAll();
   }
 
-  const select = (canvas: fabric.Canvas) => {
+  const select = () => {
     canvas.isDrawingMode = false;
+    canvas?.requestRenderAll();
   }
 
   const handleColorPicker = (e: any) => {
     setColor(e)
-    if(canvas.isDrawingMode){
-      draw(canvas)
+    if (canvas.isDrawingMode) {
+      draw()
     }
   }
-
 
   const addImage = (imgURL: string) => {
     var pugImg = new Image();
@@ -129,35 +127,34 @@ function Toolbar({ canvas, activeLayer }: Props) {
   return (
     <div className=' bg-zinc-900 w-20 m-1 rounded-xl flex  flex-col  p-3 gap-3 '>
       <button className=' h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col '
-        onClick={() => select(canvas
-        )}>
+        onClick={() => select()}>
         <MousePointer2 />
         <span className='text-[10px]'>
           Cursors</span>
       </button> <button className=' h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col '
-        onClick={() => draw(canvas)}>
+        onClick={() => draw()}>
         <PenTool />
         <span className='text-[10px]'>Pen</span>
       </button>
       <button className=' h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col '
-        onClick={() => eraseElents(canvas)}>
+        onClick={() => eraseElents()}>
         <Eraser />
         <span className='text-[10px]'>
           Eraser
         </span>
       </button>
       <button className=' h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col '
-        onClick={() => addRect(canvas)}>
+        onClick={() => addRect()}>
         <Square />
         <span className='text-[10px]'>Square</span>
       </button>
       <button className=' h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col '
-        onClick={() => addCircle(canvas)}>
+        onClick={() => addCircle()}>
         <Circle />
         <span className='text-[10px]'>Circle</span>
       </button>
       <button className=' h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col '
-        onClick={() => addText(canvas)}>
+        onClick={() => addText()}>
         <Type />
         <span className='text-[10px]'>Text</span>
       </button>
