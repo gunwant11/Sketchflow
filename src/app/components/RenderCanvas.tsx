@@ -27,6 +27,7 @@ function RenderCanvas() {
         newLayer.object.renderAll()
         setCanvas(newLayer.object)
         setActiveLayer(newLayer.id)
+        // @ts-ignore
         setLayers((prevLayers) => [...prevLayers, newLayer]);
     };
 
