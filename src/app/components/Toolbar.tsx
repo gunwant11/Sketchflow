@@ -85,7 +85,7 @@ function Toolbar({ canvas }: Props) {
   }
 
   const eraseElents = () => {
-
+    // @ts-ignore
     const erase = new fabric.EraserBrush(canvas);
     canvas.freeDrawingBrush = erase
     canvas.freeDrawingBrush.width = 10
