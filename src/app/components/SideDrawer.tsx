@@ -65,7 +65,8 @@ function SideDrawer({ canvas, layers, setLayers, addLayer, setCanvas, activeLaye
 
   return (
     <div className=' bg-zinc-900 w-[360px]  m-1 rounded-xl  flex flex-col gap-3 p-3 '>
-      <button onClick={() => addLayer()}>Add Layer</button>
+      <button onClick={() => addLayer()}
+      className=' hover:text-violet-500  h-10 bg-zinc-800 rounded-xl flex justify-center items-center flex-col active:text-white active:bg-violet-500' >Add Layer</button>
       <DndProvider backend={HTML5Backend}>
         {layers.map((layer, i) => (
           <LayerComponent
