@@ -37,8 +37,18 @@ function RenderCanvas() {
         <div className="flex flex-row flex-1 ">
             {canvas && <>
                 <Toolbar canvas={canvas} />
-                <div className=" flex-1 grid place-items-center" >
-                    <div id="layer-container" className="bg-white rounded-lg w-[920px] h-[540px] relative" ref={layerContainer} />
+                <div className=" flex-1 grid place-items-center" 
+                onDragEnd={(e) => {
+                    console.log(e)
+
+                }}
+                onDrop={(e) => {
+                    console.log('first')
+                }}
+                >
+                    <div id="layer-container" className="bg-white rounded-lg w-[920px] h-[540px] relative" ref={layerContainer} >
+                    <canvas id="canvas-0" />
+                    </div>
                 </div>
                 <SideDrawer canvas={canvas} layers={layers} setLayers={setLayers} addLayer={addLayer} setCanvas={setCanvas} activeLayer={activeLayer} setActiveLayer={setActiveLayer} />
             </>}
