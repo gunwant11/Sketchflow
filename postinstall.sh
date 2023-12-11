@@ -1,5 +1,5 @@
 
 
-cd node_modules/fabric
-npm i uglifyjs -g
-node build.js modules=ALL requirejs exclude=gestures,accessors
+# copy the fabric.js from root to node_modules/fabric/dist
+
+cp -r ./fabric.js ./node_modules/fabric/dist
