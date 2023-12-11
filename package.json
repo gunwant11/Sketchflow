@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "chmod +x ./postinstall.sh && ./postinstall.sh"
+    // "postinstall": "chmod +x ./postinstall.sh && ./postinstall.sh"
   },
   "dependencies": {
     "fabric": "^5.3.0",
