@@ -46,7 +46,7 @@ function RenderCanvas() {
                     <div id="layer-container" className="bg-white rounded-lg w-[920px] h-[540px] relative" ref={layerContainer} >
                     </div>
                 </div>
-                <SideDrawer canvas={canvas} layers={layers} setLayers={setLayers} addLayer={addLayer} setCanvas={setCanvas} activeLayer={activeLayer} setActiveLayer={setActiveLayer} />
+                <SideDrawer canvas={canvas!} layers={layers} setLayers={setLayers} addLayer={addLayer} setCanvas={setCanvas} activeLayer={activeLayer} setActiveLayer={setActiveLayer} />
         
         </div>
     )
