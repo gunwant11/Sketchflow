@@ -2,6 +2,8 @@ import React, { use, useEffect, useRef, useState } from 'react'
 import SideDrawer, { ILayer } from './SideDrawer';
 import { createCanvas } from '../utils/createCanvas';
 import Toolbar from './Toolbar';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 function RenderCanvas() {
     const [canvas, setCanvas] = useState<fabric.Canvas>();
