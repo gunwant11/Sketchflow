@@ -1,4 +1,4 @@
 
 
 cd node_modules/fabric
-npm run build:fast
+node build.js modules=ALL requirejs exclude=gestures,accessors

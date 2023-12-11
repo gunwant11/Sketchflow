@@ -1,4 +1,4 @@
-import { Circle, Eraser, ImagePlus, MousePointer2, PenTool, Square, Type } from 'lucide-react';
+import { Circle, Eraser, ImagePlus, MousePointer2, Palette, PenTool, Square, Type } from 'lucide-react';
 import React, { useRef } from 'react'
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/css";
@@ -126,53 +126,53 @@ function Toolbar({ canvas }: Props) {
 
   return (
     <div className=' bg-zinc-900 w-20 m-1 rounded-xl flex  flex-col  p-3 gap-3 '>
-      <button className=' h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col '
+      <button className=' hover:text-violet-500  h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col active:text-white active:bg-violet-500' 
         onClick={() => select()}>
         <MousePointer2 />
-        <span className='text-[10px]'>
+        <span className=' hover:text-violet-500 text-[10px] active:text-white active:bg-violet-500'>
           Cursors</span>
-      </button> <button className=' h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col '
+      </button> <button className=' hover:text-violet-500  h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col '
         onClick={() => draw()}>
         <PenTool />
-        <span className='text-[10px]'>Pen</span>
+        <span className=' hover:text-violet-500 text-[10px]'>Pen</span>
       </button>
-      <button className=' h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col '
+      <button className=' hover:text-violet-500  h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col  '
         onClick={() => eraseElents()}>
         <Eraser />
-        <span className='text-[10px]'>
+        <span className=' hover:text-violet-500 text-[10px]'>
           Eraser
         </span>
       </button>
-      <button className=' h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col '
+      <button className=' hover:text-violet-500  h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col active:text-white active:bg-violet-500 '
         onClick={() => addRect()}>
         <Square />
-        <span className='text-[10px]'>Square</span>
+        <span className=' hover:text-violet-500 text-[10px] active:text-white active:bg-violet-500'>Square</span>
       </button>
-      <button className=' h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col '
+      <button className=' hover:text-violet-500  h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col active:text-white active:bg-violet-500 '
         onClick={() => addCircle()}>
         <Circle />
-        <span className='text-[10px]'>Circle</span>
+        <span className=' hover:text-violet-500 text-[10px] active:text-white active:bg-violet-500'>Circle</span>
       </button>
-      <button className=' h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col '
+      <button className=' hover:text-violet-500  h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col active:text-white active:bg-violet-500'
         onClick={() => addText()}>
         <Type />
-        <span className='text-[10px]'>Text</span>
+        <span className=' hover:text-violet-500 text-[10px] active:text-white active:bg-violet-500'>Text</span>
       </button>
-      <button className=' relative h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col '
+      <button className=' hover:text-violet-500  relative h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col active:text-white active:bg-violet-500 '
         onClick={() => setShowColorPicker(!showColorPicker)}>
-        <span className='absolute min-w-[360px] left-[75px] z-10' ref={colorPickerRef}>
+        <span className=' hover:text-violet-500 absolute min-w-[360px] left-[75px] z-10 active:text-white active:bg-violet-500' ref={colorPickerRef}>
           {showColorPicker &&
             <ColorPicker
               color={color}
               onChange={handleColorPicker} />}
         </span>
-        <span className='text-[10px]'>Color</span>
+        <span className=' hover:text-violet-500 text-[10px]'><Palette /></span>
       </button>
       <input type="file" onChange={handleImageUpload} style={{ display: 'none' }}
         id="imageInput" />
-      <label htmlFor="imageInput" className=' h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col ' >
+      <label htmlFor="imageInput" className=' hover:text-violet-500  h-14 bg-zinc-800 rounded-xl flex justify-center items-center flex-col active:text-white active:bg-violet-500' >
         <ImagePlus />
-        <span className='text-[10px]'>Image</span>
+        <span className=' hover:text-violet-500 text-[10px] active:text-white active:bg-violet-500'>Image</span>
       </label>
 
     </div>
