@@ -2,8 +2,7 @@ import React, { use, useEffect, useRef, useState } from 'react'
 import SideDrawer, { ILayer } from './SideDrawer';
 import { createCanvas } from '../utils/createCanvas';
 import Toolbar from './Toolbar';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { fabric } from 'fabric';
 
 function RenderCanvas() {
     const [canvas, setCanvas] = useState<fabric.Canvas>();
@@ -30,17 +29,36 @@ function RenderCanvas() {
         setLayers((prevLayers) => [...prevLayers, newLayer]);
     };
 
+    const handleImageUpload = (event: React.DragEvent<HTMLDivElement>) => {
+        const data = event.dataTransfer;
+        const file = data.files[0];
+
+        if (file && canvas) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const imgURL = e.target?.result as string;
+                const img = new Image();
+                img.onload = function () {
+                    const image = new fabric.Image(img);
+                    canvas?.add(image);
+                    canvas?.requestRenderAll();
+                };
+                img.src = imgURL;
+
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
     return (
         <div className="flex flex-row flex-1 ">
       
               {canvas &&  <Toolbar canvas={canvas} />}
                 <div className=" flex-1 grid place-items-center" 
-                onDragEnd={(e) => {
-                    console.log(e)
-
-                }}
-                onDrop={(e) => {
-                    console.log('first')
+                onDrop={handleImageUpload}
+                onDragOver={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                 }}
                 >
                     <div id="layer-container" className="bg-white rounded-lg w-[920px] h-[540px] relative" ref={layerContainer} >
