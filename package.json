@@ -9,7 +9,7 @@
     "start": "next start",
     "deploy": "now",
     "lint": "next lint",
-    "postinstall": "chmod +x postinstall.sh && ./postinstall.sh"
+    "postinstall": "cd node_modules/fabric && npm install  && node build.js modules=ALL requirejs exclude=gestures,accessors"
   },
   "dependencies": {
     "fabric": "^5.3.0",
