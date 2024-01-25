@@ -8,7 +8,7 @@
     "start": "next start",
     "deploy": "now",
     "lint": "next lint",
-    "preinstall": "yarn add uglify-js --save-dev",
+    "preinstall": "npm install uglify-js --save-dev",
     "postinstall": "cd node_modules/fabric && npm install  && node build.js modules=ALL requirejs exclude=gestures,accessors"
   },
   "dependencies": {
