@@ -5,10 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "now-build": "yum install libuuid-devel libmount-devel && cp /lib64/{libuuid,libmount,libblkid}.so.1 node_modules/canvas/build/Release/ && npm run build",
     "start": "next start",
     "deploy": "now",
     "lint": "next lint",
+    "preinstall": "yarn add uglify-js --save-dev",
     "postinstall": "cd node_modules/fabric && npm install  && node build.js modules=ALL requirejs exclude=gestures,accessors"
   },
   "dependencies": {
@@ -20,7 +20,8 @@
     "react-color-palette": "^7.1.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "uglify-js": "^3.17.4"
   },
   "devDependencies": {
     "@types/fabric": "^5.3.6",
