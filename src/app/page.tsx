@@ -28,7 +28,7 @@ const Home = () => {
                                         <rect x="163.11" y="13.624" width="45" height="45" rx="22.5" fill="rgb(124 58 237)" />
                                     </svg>
                                     </div>
-                                    <h2 className="mb-8 text-2xl text-violet-600 font-bold">Sign in to unlock the <br /> best of Sketchflow.</h2>
+                                    <h2 className="mb-8 text-2xl text-white font-bold">Sign in to unlock the <br /> best of <div className="text-violet-600">Sketchflow</div>.</h2>
                                 </div>
                                 <div className="mt-8 grid space-y-4">
                                     <button className="group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 
