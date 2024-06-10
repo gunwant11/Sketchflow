@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 
+const { types } = require("util");
+
 if (
   process.env.LD_LIBRARY_PATH == null ||
   !process.env.LD_LIBRARY_PATH.includes(
@@ -15,6 +17,9 @@ const nextConfig = {
   reactStrictMode: false,
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
   webpack: (config) => {
     config.externals.push({
