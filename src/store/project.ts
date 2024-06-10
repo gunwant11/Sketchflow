@@ -17,17 +17,26 @@ interface ProjectStore {
     setLayers: (layers: Layer[]) => void;
     title: string;
     setTitle: (title: string) => void;
+    dashboardLoading: boolean;
+    setDashboardLoading: (loading: boolean) => void;
+    projectLoading: boolean;
+    setProjectLoading: (loading: boolean) => void;
 }
 
 
 export const ProjectStore = create<ProjectStore>((set, get) => ({
     projects: [],
     setTitle: (title) => set({ title }),
+    dashboardLoading: true,
+    setDashboardLoading: (loading) => set({ dashboardLoading: loading }),
     title: 'New Project',
     setProjects: (projects) => set({ projects }),
+    projectLoading: false,
+    setProjectLoading: (loading) => set({ projectLoading: loading }),
     fetchProjects: async (userId) => {
         // fetch projects
         try {
+            set({ dashboardLoading: true });
             const projects = await fetch(`/api/project?userId=${userId}`, {
                 method: 'GET',
                 headers: {
@@ -41,10 +50,14 @@ export const ProjectStore = create<ProjectStore>((set, get) => ({
         catch (error) {
             console.error(error);
         }
+        finally {
+            set({ dashboardLoading: false });
+        }
     },
     createProject: async () => {
         // create project
         try {
+
             const userId = UserStore.getState().user?.id;
             const project = await fetch(`/api/project`, {
                 method: 'POST',

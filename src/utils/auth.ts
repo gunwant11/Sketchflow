@@ -11,7 +11,7 @@ export const authOptions = {
     ],
     secret: process.env.NEXTAUTH_SECRET ?? "",
     session: {
-        jwt: true,
+        strategy: 'jwt',
     },
     adapter: PrismaAdapter(prisma) as Adapter,
     jwt: {
@@ -19,14 +19,18 @@ export const authOptions = {
         encryption: true,
     },
     callbacks: {
-        async jwt(token, user) {
+        async jwt({ token, user }) {
+            console.log('jwt', user, token);
             if (user) {
                 token.id = user.id;
+                token.email = user.email;
+                token.image = user.image;
             }
             return token;
         },
-        async session(session, token) {
-            session.user.id = token.id;
+        async session({ session, token }) {
+            console.log('session', token);
+            session.user = token;
             return session;
         },
     },
