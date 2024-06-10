@@ -3,8 +3,10 @@
 import type { Identifier, XYCoord } from 'dnd-core'
 import { useRef, useState } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
-import {  EyeIcon, EyeOff, Trash2 } from 'lucide-react'
+import { EyeIcon, EyeOff, Trash2 } from 'lucide-react'
 import { ILayer } from './SideDrawer'
+import { Layer } from '@prisma/client'
+import { ProjectStore } from '@/store/project'
 
 interface DragItem {
   index: number
@@ -17,18 +19,20 @@ const ItemTypes = {
 }
 
 interface LayerProps {
-  layer: ILayer
+  layer: Layer
   index: number
   id: number
   active: boolean
   handleDelete: (id: number) => void
   moveCard: (dragIndex: number, hoverIndex: number) => void
-  handleSelectLayer : (layer: ILayer) => void
+  handleSelectLayer: (layer: ILayer) => void
+  setLayers: React.Dispatch<React.SetStateAction<ILayer[]>>
 }
 
-const LayerComponent = ({ layer, index, active, moveCard, id, handleDelete, handleSelectLayer }: LayerProps) => {
-  const [showLayer, setShowLayer] = useState(true);
+const LayerComponent = ({ layer, index, active, moveCard, id, handleDelete, handleSelectLayer, setLayers }: LayerProps) => {
   const ref = useRef<HTMLDivElement>(null);
+
+  const { layers } = ProjectStore()
 
   const [{ handlerId }, drop] = useDrop<DragItem, void, { handlerId: Identifier | null }>({
     accept: ItemTypes.Layer,
@@ -77,12 +81,20 @@ const LayerComponent = ({ layer, index, active, moveCard, id, handleDelete, hand
   const handleHideLayer = (e: React.MouseEvent) => {
     e.stopPropagation()
     const wrapper = layer.object.wrapperEl as HTMLDivElement
-    wrapper.style.display = showLayer ? 'none' : 'block'
-    setShowLayer(!showLayer)
+    wrapper.style.display = layer.visible ? 'none' : 'block'
+
+    const updatedLayers = layers.map((prevLayer) => {
+      if (prevLayer.id === layer.id) {
+        return { ...prevLayer, visible: !prevLayer.visible }
+      }
+      return prevLayer
+    }
+    )
+    setLayers(updatedLayers)
 
   };
 
-  const handleDeleteClick = (e : React.MouseEvent) => {
+  const handleDeleteClick = (e: React.MouseEvent) => {
     e.stopPropagation()
     handleDelete(id)
   };
@@ -97,7 +109,7 @@ const LayerComponent = ({ layer, index, active, moveCard, id, handleDelete, hand
       className={`bg-zinc-800 rounded-xl flex items-center p-2 ${active && `border-2 border-violet-500 accent-violet-600`} `}
     >
       <span className="cursor-pointer" onClick={handleHideLayer}>
-        {showLayer ? <EyeIcon /> : <EyeOff />}
+        {layer.visible ? <EyeIcon /> : <EyeOff />}
       </span>
       <div className="flex-1 flex items-center">
         <div className="w- h-10 rounded-lg bg-zinc-700 mx-2" />
