@@ -9,6 +9,7 @@ export const authOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
         }),
     ],
+    secret: process.env.NEXTAUTH_SECRET ?? "",
     adapter: PrismaAdapter(prisma) as Adapter,
     callbacks: {
     },
