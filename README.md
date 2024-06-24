@@ -2,6 +2,8 @@
 
 This is a canvas application built with Next.js and Fabric.js, providing features for image manipulation, basic shape drawing, sketching, and layer management.
 
+![image](https://github.com/gunwant11/Sketchflow/assets/72063762/cbbb4f23-b578-4019-928b-e281f7c68f03)
+
 ## Features
 
 1. **Image Manipulation:**
