@@ -27,8 +27,8 @@ const Dashboard = () => {
         router.push(`/project/${project.id}`)
     }
     return (
-        <div className='w-full min-h-screen bg-violet-300/10 font  flex flex-col'>
-            <div className='w-full h-16 bg-zinc-900 border-b-2  border-violet-600/50 flex items-center justify-center'>
+        <div className='w-full min-h-screen bg-zinc-900 font  flex flex-col'>
+            <div className='w-full h-16 bg-zinc-800 border- flex items-center justify-center'>
                 <div className='flex justify-between items-center w-3/5'>
                     <h1 className='text-2xl  '>Sketchflow</h1>
                     <div className='flex items-center gap-2'>
@@ -53,10 +53,12 @@ const Dashboard = () => {
                 <div className='grid grid-cols-3 gap-4 mt-4'>
                     {
                         projects.map((project) => (
-                            <div key={project.id} onClick={() => router.push(`/project/${project.id}`)} className='bg-violet-400/20 shadow p-4 rounded-md mt-4  flex flex-col  cursor-pointer'>
-                                <img src={project?.thumbnail} alt={project?.title} className='rounded' />
-                                <h2 className='mt-2' >{project?.title}</h2>
-                                <div className='text-sm text-gray-300' > Last modified : {Date(project?.updatedAt).toString().split(' ').slice(0, 4).join(' ')}</div>
+                            <div key={project.id} onClick={() => router.push(`/project/${project.id}`)} className='bg-zinc-600 shadow  overflow-hidden  rounded-lg mt-4  flex flex-col  cursor-pointer'>
+                                <img src={project?.thumbnail} alt={project?.title} className='' />
+                                <div className='px-4 py-3'>
+                                    <h2  >{project?.title}</h2>
+                                    <div className='text-sm text-gray-300' > Last modified : {Date(project?.updatedAt).toString().split(' ').slice(0, 4).join(' ')}</div>
+                                </div>
                             </div>
                         ))
                     }
