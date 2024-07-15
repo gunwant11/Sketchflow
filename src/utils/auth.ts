@@ -18,6 +18,22 @@ export const authOptions = {
         secret: process.env.NEXTAUTH_SECRET,
         encryption: true,
     },
+
+    events: {
+        async createUser({ user }) {
+            // Create a default team for the new user
+            await prisma.team.create({
+                data: {
+                    name: 'My Team',
+                    creatorId: user.id,
+                    members: {
+                        connect: { id: user.id },
+                    },
+                },
+            });
+        },
+    },
+
     callbacks: {
         async jwt({ token, user }) {
             console.log('jwt', user, token);

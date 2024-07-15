@@ -3,7 +3,7 @@ import React, { useCallback, useEffect } from 'react'
 import { fabric } from 'fabric'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import LayerComponent from './DrawerCard'
+import LayerComponent from './LayerComponent'
 import { ProjectStore } from '@/store/project'
 
 
@@ -16,7 +16,7 @@ export interface ILayer {
 }
 
 
-interface SideDrawerProps {
+interface LayersPanalProps {
   canvas: fabric.Canvas
   addLayer: () => void
   activeLayer: number
@@ -24,7 +24,7 @@ interface SideDrawerProps {
 }
 
 
-function SideDrawer({ addLayer, activeLayer, setActiveLayer }: SideDrawerProps) {
+function LayersPanal({ addLayer, activeLayer, setActiveLayer }: LayersPanalProps) {
 
   const { canvas, layers, setLayers, setCanvas } = ProjectStore()
   const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
@@ -89,4 +89,4 @@ function SideDrawer({ addLayer, activeLayer, setActiveLayer }: SideDrawerProps) 
   )
 }
 
-export default SideDrawer
+export default LayersPanal

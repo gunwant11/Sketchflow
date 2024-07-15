@@ -16,7 +16,7 @@ const Home = () => {
     }
     return (
         <div>
-            <div className="relative py-16 bg-gradient-to-br from-zinc-100 h-screen grid place-items-center to-zinc-400">
+            <div className="relative py-16 bg-gradient-to-br from-zinc-500 h-screen grid place-items-center to-zinc-600">
                 <div className="relative container m-auto px-6 text-zinc-900 md:px-12 xl:px-40">
                     <div className="m-auto md:w-7/12 lg:w-5/12 xl:w-5/12">
                         <div className="rounded-xl bg-zinc-700 shadow-xl">

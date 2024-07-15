@@ -1,5 +1,5 @@
 import React, { use, useEffect, useRef, useState } from 'react'
-import SideDrawer, { ILayer } from './SideDrawer';
+import SideDrawer, { ILayer } from './LayersPanal';
 import Toolbar from './Toolbar';
 import { fabric } from 'fabric';
 import { createCanvas, saveImage } from '@/utils/createCanvas';

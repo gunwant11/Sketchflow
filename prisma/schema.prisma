@@ -16,9 +16,11 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    projects      Project[]
+    createdTeams  Team[]    @relation("createdTeams")
+    memberOfTeams Team[]    @relation("members")
     createdAt     DateTime  @default(now())
     updatedAt     DateTime  @updatedAt
-    Project       Project[]
 }
 
 model Account {
@@ -58,6 +60,9 @@ model Project {
     thumbnail String?
     user      User     @relation(fields: [userId], references: [id])
     layers    Layer[]
+    favorite  Boolean  @default(false)
+    teamId    String?
+    team      Team?    @relation(fields: [teamId], references: [id])
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
@@ -71,4 +76,16 @@ model Layer {
     projectId   String
     containerId String?
     project     Project @relation(fields: [projectId], references: [id])
+}
+
+model Team {
+    id        String    @id @default(cuid())
+    name      String
+    creatorId String
+    image     String?   @default("https://ui-avatars.com/api/?name=Team&background=0D8ABC&color=fff")
+    creator   User      @relation("createdTeams", fields: [creatorId], references: [id])
+    members   User[]    @relation("members")
+    projects  Project[]
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
 }

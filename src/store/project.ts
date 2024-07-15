@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { UserStore } from './user';
+import { Team } from '@prisma/client';
 
 // const [canvas, setCanvas] = useState<fabric.Canvas>();
 // const [layers, setLayers] = useState<Layer[]>([])
@@ -21,6 +22,13 @@ interface ProjectStore {
     setDashboardLoading: (loading: boolean) => void;
     projectLoading: boolean;
     setProjectLoading: (loading: boolean) => void;
+    teams: Team[];
+    setTeams: (teams: Team[]) => void;
+    fetchTeams: (userId: string) => void;
+    selectedTeam: Team | null;
+    setSelectedTeam: (team: Team) => void;
+    drawerTab: string;
+    setDrawerTab: (tab: string) => void;
 }
 
 
@@ -64,7 +72,7 @@ export const ProjectStore = create<ProjectStore>((set, get) => ({
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ userId }),
+                body: JSON.stringify({ userId, teamId: get().selectedTeam?.id }),
             });
             const data = await project.json();
             const projects = get().projects;
@@ -114,4 +122,26 @@ export const ProjectStore = create<ProjectStore>((set, get) => ({
     setCanvas: (canvas) => set({ canvas }),
     layers: [],
     setLayers: (layers) => set({ layers }),
+    teams: [],
+    setTeams: (teams) => set({ teams }),
+    fetchTeams: async (userId) => {
+        try {
+            const teams = await fetch(`/api/team?userId=${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await teams.json();
+            set({ teams: data.teams, selectedTeam: data.teams[0] });
+
+        }
+        catch (error) {
+            console.error(error);
+        }
+    },
+    selectedTeam: null,
+    setSelectedTeam: (team) => set({ selectedTeam: team }),
+    drawerTab: 'teams',
+    setDrawerTab: (tab) => set({ drawerTab: tab }),
 }));

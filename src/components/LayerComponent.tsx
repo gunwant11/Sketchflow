@@ -4,7 +4,7 @@ import type { Identifier, XYCoord } from 'dnd-core'
 import { useRef, useState } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import { EyeIcon, EyeOff, Trash2 } from 'lucide-react'
-import { ILayer } from './SideDrawer'
+import { ILayer } from './LayersPanal'
 import { Layer } from '@prisma/client'
 import { ProjectStore } from '@/store/project'
 
