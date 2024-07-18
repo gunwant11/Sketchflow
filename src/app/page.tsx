@@ -15,20 +15,21 @@ const Home = () => {
         const res = await signIn('google', { callbackUrl: '/dashboard' });
     }
     return (
-        <div>
-            <div className="relative py-16 bg-gradient-to-br from-zinc-500 h-screen grid place-items-center to-zinc-600">
-                <div className="relative container m-auto px-6 text-zinc-900 md:px-12 xl:px-40">
+        <div className='wrapper'>
+            <div className=" relative h-screen grid place-items-center">
+                <div className='hero'></div>
+                <div className="relative content container m-auto px-6 text-zinc-900 md:px-12 xl:px-40">
                     <div className="m-auto md:w-7/12 lg:w-5/12 xl:w-5/12">
-                        <div className="rounded-xl bg-zinc-700 shadow-xl">
+                        <div className="rounded-xl bg-zinc-800 shadow-xl">
                             <div className="p-6 sm:p-16">
-                                <div className="space-y-4">
+                                <div className="flex w-full gap-6">
                                     <div className='h-10' ><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 245 258" fill="none">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M153.188 28.6609L152.11 28.0385C133.546 17.3205 110.674 17.3205 92.1096 28.0385L50 52.3504C31.4359 63.0684 20 82.876 20 104.312V152.936C20 174.372 31.4359 194.179 50 204.897L92.1096 229.209C110.674 239.927 133.546 239.927 152.11 229.209L194.219 204.897C212.783 194.179 224.219 174.372 224.219 152.936V104.312C224.219 88.5372 218.026 73.6442 207.356 62.6066C212.586 58.1397 216.424 52.0912 218.129 45.2018C234.557 60.1837 244.219 81.5599 244.219 104.312V152.936C244.219 181.517 228.971 207.927 204.219 222.218L162.11 246.53C137.357 260.821 106.862 260.821 82.1096 246.53L40 222.218C15.2479 207.927 0 181.517 0 152.936V104.312C0 75.7307 15.2479 49.3206 40 35.0299L82.1096 10.718C106.862 -3.57267 137.357 -3.57267 162.11 10.718L163.801 11.6943C158.701 16.0724 154.932 21.9584 153.188 28.6609Z" fill="#d1d1d1" />
                                         <path d="M63.1096 129.124C63.1096 96.8153 89.301 70.6239 121.61 70.6239V70.6239C153.918 70.6239 180.11 96.8153 180.11 129.124V129.124C180.11 161.433 153.918 187.624 121.61 187.624V187.624C89.301 187.624 63.1096 161.433 63.1096 129.124V129.124Z" fill="#d1d1d1" />
                                         <rect x="163.11" y="13.624" width="45" height="45" rx="22.5" fill="rgb(124 58 237)" />
                                     </svg>
                                     </div>
-                                    <h2 className="mb-8 text-2xl text-white font-bold">Sign in to unlock the <br /> best of <span className="text-violet-600">Sketchflow.</span></h2>
+                                    <h2 className=" text-2xl text-white font-bold">Sign in to unlock the <br /> best of <span className="text-violet-600">Sketchflow.</span></h2>
                                 </div>
                                 <div className="mt-8 grid space-y-4">
                                     <button className="group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 
