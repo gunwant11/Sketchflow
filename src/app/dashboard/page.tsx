@@ -110,7 +110,7 @@ const Dashboard = () => {
                     <button onClick={handleCreateProject}
                         className='bg-violet-500/40  border border-violet-500 text-white p-2 px-10 rounded-md'
                     >  Create Project +</button>
-                    {filteredProjects.length === 0 ? <div className='text-white text-center gap-2 h-full flex flex-col items-center justify-center'>
+                    {filteredProjects.length === 0 ? <div className='text-white text-center gap-2 h-[80%] flex flex-col items-center justify-center'>
 
                         <img src='/sketchbook.png' className=' w-32 opacity-80' />
                         <h1 className='text-2xl mb-10'> Create your first project! </h1>
